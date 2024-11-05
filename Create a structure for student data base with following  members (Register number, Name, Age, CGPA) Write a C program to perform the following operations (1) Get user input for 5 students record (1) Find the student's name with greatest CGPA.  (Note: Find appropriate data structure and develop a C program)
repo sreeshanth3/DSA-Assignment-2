@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <string.h>
+struct Student {
+    int registerNumber;
+    char name[100];
+    int age;
+    float cgpa;
+};
+
+int main() {
+    struct Student students[5]; 
+    int i;
+    int highestCgpaIndex = 0;
+
+    for (i = 0; i < 5; i++) {
+        printf("Enter details for student %d:\n", i + 1);
+        printf("Register Number: ");
+        scanf("%d", &students[i].registerNumber);
+        printf("Name: ");
+        getchar();
+        fgets(students[i].name, sizeof(students[i].name), stdin);
+        students[i].name[strcspn(students[i].name, "\n")] = 0;
+        printf("Age: ");
+        scanf("%d", &students[i].age);
+        printf("CGPA: ");
+        scanf("%f", &students[i].cgpa);
+        printf("\n");
+    }
+
+    for (i = 1; i < 5; i++) {
+        if (students[i].cgpa > students[highestCgpaIndex].cgpa) {
+            highestCgpaIndex = i;
+        }
+    }
+
+    printf("Student with the greatest CGPA:\n");
+    printf("Register Number: %d\n", students[highestCgpaIndex].registerNumber);
+    printf("Name: %s\n", students[highestCgpaIndex].name);
+    printf("Age: %d\n", students[highestCgpaIndex].age);
+    printf("CGPA: %.2f\n", students[highestCgpaIndex].cgpa);
+
+    return 0;
+}
